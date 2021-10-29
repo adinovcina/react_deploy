@@ -1,0 +1,55 @@
+#answerUser {
+  font-weight: bold;
+}
+#loadMore {
+  height: 40px;
+  position: relative;
+  margin-left: 20px;
+}
+#hide {
+  height: 40px;
+  position: relative;
+  left: 30%;
+  margin-left: 50px;
+}
+#commentBtn {
+  height: 40px;
+  position: relative;
+  right: 30%;
+}
+#commentInput {
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 10px;
+  border: 2px solid grey;
+  width: 95%;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+#commentTitle {
+  margin: 30px 0px -20px 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+#noCommentBtn {
+  height: 40px;
+  position: relative;
+  left: 10%;
+}
+
+#trashBtn {
+  font-size: 22px;
+  color: orangered;
+  float: right;
+}
+#editBtn {
+  font-size: 22px;
+  color: black;
+  float: right;
+  margin-right: 15px;
+}
+#cancelBtn {
+  float: right;
+  font-size: 22px;
+  margin: -2px 15px 0px 0px;
+  display: none;
+}
