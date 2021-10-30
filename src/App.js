@@ -44,11 +44,9 @@ class App extends Component {
       postid: postId,
       grade: 1,
     };
-    this.props.update(newGrade);
-    // setTimeout(() => {
+    // this.props.update(newGrade);
     this.props.postGrade(newGrade);
     this.props.updateGrade(newGrade);
-    // }, 100);
   }
 
   handleDislike(postId) {
@@ -57,11 +55,9 @@ class App extends Component {
       grade: -1,
     };
 
-    this.props.update(newGrade);
-    // setTimeout(() => {
+    // this.props.update(newGrade);
     this.props.postGrade(newGrade);
     this.props.updateGrade(newGrade);
-    // }, 100);
   }
 
   handleLoadMore() {
@@ -84,6 +80,12 @@ class App extends Component {
   renderPosts() {
     if (_.isEmpty(this.props.user)) {
       return _.map(this.props.posts, (post, key) => {
+        var gradeFilterLikes = _.filter(this.props.grades, function (a) {
+          return a.postid === post.id && a.grade === 1;
+        });
+        var gradeFilterDislikes = _.filter(this.props.grades, function (a) {
+          return a.postid === post.id && a.grade === -1;
+        });
         return (
           <Card id="card" key={key}>
             <Card.Text id="cardText">
@@ -101,10 +103,10 @@ class App extends Component {
               <br />
               <br />
               <i className="fa fa-thumbs-up fa-like" id="thumbUp">
-                {post.likes}
+                {gradeFilterLikes.length}
               </i>
               <i className="fa fa-thumbs-down fa-dislike" id="thumbDown">
-                {post.dislikes}
+                {gradeFilterDislikes.length}
               </i>
               <hr />
               <Answer
@@ -167,7 +169,6 @@ class App extends Component {
                 }}
                 onClick={() => this.handleLike(post.id)}
               >
-                {/* {post.likes}{" "} */}
                 {gradeFilterLikes.length}
               </i>
               <i
@@ -184,7 +185,6 @@ class App extends Component {
                 }}
                 onClick={() => this.handleDislike(post.id)}
               >
-                {/* {post.dislikes} */}
                 {gradeFilterDislikes.length}
               </i>
               <hr />
@@ -242,13 +242,15 @@ class App extends Component {
           </div>
         ) : null}
         {this.renderPosts()}
-        <Button
-          variant="secondary"
-          id="loadMorePosts"
-          onClick={this.handleLoadMore}
-        >
-          Load more
-        </Button>
+        {this.props.posts.length > this.state.loadMore ? (
+          <Button
+            variant="secondary"
+            id="loadMorePosts"
+            onClick={this.handleLoadMore}
+          >
+            Load more
+          </Button>
+        ) : null}
       </>
     );
   }

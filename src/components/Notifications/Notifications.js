@@ -4,7 +4,7 @@ import { getNotifications } from "../../actions/notificationAction";
 import { connect } from "react-redux";
 import _ from "lodash";
 import Card from "react-bootstrap/Card";
-import Alert from "react-bootstrap/Alert";
+import NoDataFound from "../NoDataFound";
 import moment from "moment";
 import Button from "react-bootstrap/Button";
 
@@ -51,7 +51,7 @@ class Notifications extends Component {
     return (
       <>
         {this.renderNotifications()}
-        {this.props.notifications.length > 7 ? (
+        {this.props.notifications.length > this.state.loadMore ? (
           <Button
             variant="secondary"
             id="loadMorePosts"
@@ -60,18 +60,7 @@ class Notifications extends Component {
             Load more
           </Button>
         ) : null}
-        {this.props.notifications.length == 0 ? (
-          <Alert
-            style={{
-              marginTop: "20%",
-              textAlign: "center",
-              color: "white",
-              backgroundColor: "cadetblue",
-            }}
-          >
-            <b>No data found.</b>
-          </Alert>
-        ) : null}
+        {this.props.notifications.length == 0 ? <NoDataFound /> : null}
       </>
     );
   }

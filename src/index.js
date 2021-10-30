@@ -21,9 +21,6 @@ import Notifications from "./components/Notifications/Notifications";
 axios.defaults.baseURL = "https://askit-golang.herokuapp.com/api/";
 
 store.subscribe(() => {
-  // setInterval(() => {
-  //   console.log(store.getState());
-  // }, 10000);
   axios.defaults.headers = {
     Authorization: store.getState().login.token,
   };
