@@ -17,7 +17,6 @@ import Profile from "./components/Profile/Profile";
 import Notifications from "./components/Notifications/Notifications";
 
 // axios.defaults.baseURL = "http://localhost:8080/api/";
-// axios.defaults.baseURL = "https://go-test-askit.herokuapp.com/api/";
 axios.defaults.baseURL = "https://askit-golang.herokuapp.com/api/";
 
 store.subscribe(() => {

@@ -44,7 +44,6 @@ class App extends Component {
       postid: postId,
       grade: 1,
     };
-    // this.props.update(newGrade);
     this.props.postGrade(newGrade);
     this.props.updateGrade(newGrade);
   }
@@ -55,7 +54,6 @@ class App extends Component {
       grade: -1,
     };
 
-    // this.props.update(newGrade);
     this.props.postGrade(newGrade);
     this.props.updateGrade(newGrade);
   }
@@ -122,7 +120,9 @@ class App extends Component {
             </span>
           </Card>
         );
-      }).slice(0, this.state.loadMore);
+      })
+        .reverse()
+        .slice(0, this.state.loadMore);
     } else {
       return _.map(this.props.posts, (post, key) => {
         var userId = this.props.user.id;

@@ -98,7 +98,6 @@ class Answer extends Component {
       postid: postid,
       grade: 1,
     };
-    // this.props.update(newGrade);
     this.props.postAnswerGrade(newGrade);
     this.props.updateAnswerGrade(newGrade);
   }
@@ -109,7 +108,6 @@ class Answer extends Component {
       postid: postid,
       grade: -1,
     };
-    // this.props.update(newGrade);
     this.props.postAnswerGrade(newGrade);
     this.props.updateAnswerGrade(newGrade);
   }
@@ -200,12 +198,13 @@ class Answer extends Component {
               <i className="fa fa-thumbs-down fa-dislike" id="thumbDown">
                 {gradeFilterDislikes.length}
               </i>
-              <i id="date" style={{ marginLeft: "25px", fontSize: "18px" }}>
+              <i id="date" style={{ marginLeft: "25px", fontSize: "14px" }}>
                 {moment(ans.postdate).fromNow()}
               </i>
             </Card.Text>
           );
         })
+        .reverse()
         .slice(0, this.state.loadMore);
     } else {
       var postLogged = this.props.postId;
