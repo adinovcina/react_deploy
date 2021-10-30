@@ -45,8 +45,10 @@ class App extends Component {
       grade: 1,
     };
     this.props.update(newGrade);
+    // setTimeout(() => {
     this.props.postGrade(newGrade);
     this.props.updateGrade(newGrade);
+    // }, 100);
   }
 
   handleDislike(postId) {
@@ -56,8 +58,10 @@ class App extends Component {
     };
 
     this.props.update(newGrade);
+    // setTimeout(() => {
     this.props.postGrade(newGrade);
     this.props.updateGrade(newGrade);
+    // }, 100);
   }
 
   handleLoadMore() {
@@ -125,6 +129,13 @@ class App extends Component {
           return a.postid === post.id && a.userid === userId;
         });
 
+        var gradeFilterLikes = _.filter(this.props.grades, function (a) {
+          return a.postid === post.id && a.grade === 1;
+        });
+        var gradeFilterDislikes = _.filter(this.props.grades, function (a) {
+          return a.postid === post.id && a.grade === -1;
+        });
+
         return (
           <Card id="card" key={key}>
             <i id="postId" style={{ display: "none" }}>
@@ -156,15 +167,16 @@ class App extends Component {
                 }}
                 onClick={() => this.handleLike(post.id)}
               >
-                {post.likes}{" "}
+                {/* {post.likes}{" "} */}
+                {gradeFilterLikes.length}
               </i>
               <i
                 className="fa fa-thumbs-down fa-dislike"
                 style={{
                   cursor: "pointer",
                   fontSize: "18px",
-                  paddingLeft: "20px",
-                  paddingBottom: "20px",
+                  marginLeft: "20px",
+                  marginBottom: "20px",
                   color:
                     gradeFilter[0] !== undefined && gradeFilter[0].grade === -1
                       ? "red"
@@ -172,7 +184,8 @@ class App extends Component {
                 }}
                 onClick={() => this.handleDislike(post.id)}
               >
-                {post.dislikes}
+                {/* {post.dislikes} */}
+                {gradeFilterDislikes.length}
               </i>
               <hr />
               <Answer

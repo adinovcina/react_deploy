@@ -99,8 +99,10 @@ class Answer extends Component {
       grade: 1,
     };
     this.props.update(newGrade);
-    this.props.postAnswerGrade(newGrade);
-    this.props.updateAnswerGrade(newGrade);
+    setTimeout(() => {
+      this.props.postAnswerGrade(newGrade);
+      this.props.updateAnswerGrade(newGrade);
+    }, 100);
   }
 
   handleDislike(id, postid) {
@@ -110,8 +112,10 @@ class Answer extends Component {
       grade: -1,
     };
     this.props.update(newGrade);
-    this.props.postAnswerGrade(newGrade);
-    this.props.updateAnswerGrade(newGrade);
+    setTimeout(() => {
+      this.props.postAnswerGrade(newGrade);
+      this.props.updateAnswerGrade(newGrade);
+    }, 100);
   }
 
   onConfirm() {
@@ -200,6 +204,29 @@ class Answer extends Component {
               a.answerid === ans.id
             );
           });
+
+          var gradeFilterLikes = _.filter(
+            this.props.answerGrades,
+            function (a) {
+              return (
+                a.postid === ans.postid &&
+                a.answerid === ans.id &&
+                a.grade === 1
+              );
+            }
+          );
+
+          var gradeFilterDislikes = _.filter(
+            this.props.answerGrades,
+            function (a) {
+              return (
+                a.postid === ans.postid &&
+                a.grade === -1 &&
+                a.answerid === ans.id
+              );
+            }
+          );
+
           return (
             <Card.Text key={key}>
               <span id="answerUser">
@@ -232,14 +259,15 @@ class Answer extends Component {
                 }}
                 onClick={() => this.handleLike(ans.id, ans.postid)}
               >
-                {ans.likes}
+                {/* {ans.likes} */}
+                {gradeFilterLikes.length}
               </i>
               <i
                 className="fa fa-thumbs-down fa-dislike"
                 style={{
                   cursor: "pointer",
                   fontSize: "18px",
-                  paddingLeft: "20px",
+                  marginLeft: "20px",
                   color:
                     gradeFilter[0] !== undefined && gradeFilter[0].grade === -1
                       ? "red"
@@ -247,7 +275,8 @@ class Answer extends Component {
                 }}
                 onClick={() => this.handleDislike(ans.id, ans.postid)}
               >
-                {ans.dislikes}
+                {/* {ans.dislikes} */}
+                {gradeFilterDislikes.length}
               </i>
               <i id="date" style={{ marginLeft: "25px" }}>
                 {moment(ans.postdate).fromNow()}
